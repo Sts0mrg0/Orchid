@@ -25,6 +25,13 @@ class EncodeSpacesFunction : TemplateFunction("encodeSpaces", true) {
             .resolve<StringConverter>()
             .convert(String::class.java, input)
             .second
-            .encodeSpaces()
+            .let {
+                val a = it
+                val b = it.encodeSpaces()
+
+                println("'$a' had spaces encoded to '$b'")
+
+                b
+            }
     }
 }

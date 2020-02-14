@@ -7,6 +7,7 @@ import com.eden.orchid.api.resources.resource.OrchidResource
 import net.sourceforge.plantuml.FileFormat
 import net.sourceforge.plantuml.FileFormatOption
 import net.sourceforge.plantuml.SourceStringReader
+import net.sourceforge.plantuml.cucadiagram.dot.GraphvizUtils
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.OutputStream
@@ -23,6 +24,8 @@ class PlantUmlCompiler
 constructor() : OrchidCompiler(800) {
 
     private val tags = arrayOf("uml", "salt", "math", "latex", "gantt")
+
+    // TODO: bundle a DOT executable and use GraphvizUtils.setDotExecutable() to use the bundled one (minimize system dependencies needed)
 
     override fun compile(os: OutputStream, resource: OrchidResource?, extension: String, input: String, data: MutableMap<String, Any>?) {
         OutputStreamWriter(os).append(compileMultipleDiagrams(input)).close()

@@ -60,6 +60,7 @@ internal fun List<Node>.hasHtmlSimilarTo(other: List<Node>): Boolean {
 
     // sets have different sizes, it's easy to tell they are not equal
     if (actualThis.size != actualOther.size) {
+        println("actualThis has ${actualThis.size} elements, actualOther has ${actualOther.size}")
         return false
     }
 
@@ -67,7 +68,12 @@ internal fun List<Node>.hasHtmlSimilarTo(other: List<Node>): Boolean {
         val otherElement = actualOther[index]
 
         if (thisElement is TextNode) {
-            if (otherElement !is TextNode || thisElement.text().trim().trimLines() != otherElement.text().trim().trimLines()) {
+            if (otherElement !is TextNode ) {
+                println("actualThis is TextNode, actualOther is not")
+                return@hasHtmlSimilarTo false
+            }
+            else if (thisElement.text().trim().trimLines() != otherElement.text().trim().trimLines()) {
+                println("actualThis content: '${thisElement.text().trim().trimLines()}', actualOther content: '${otherElement.text().trim().trimLines()}'")
                 return@hasHtmlSimilarTo false
             }
         } else if (thisElement is Element) {
@@ -86,6 +92,7 @@ private fun Element.hasHtmlSimilarTo(other: Element): Boolean {
     val thisTagName = tagName(this)
     val otherTagName = tagName(other)
     if (thisTagName != otherTagName) {
+        println("thisTagName '${thisTagName}', otherTagName: '${otherTagName}'")
         return false
     }
 
@@ -94,6 +101,7 @@ private fun Element.hasHtmlSimilarTo(other: Element): Boolean {
     val thisOwnTextContent = ownTextContent(this)
     val otherOwnTextContent = ownTextContent(other)
     if (thisOwnTextContent != otherOwnTextContent) {
+        println("thisOwnTextContent '${thisOwnTextContent}', otherOwnTextContent: '${otherOwnTextContent}'")
         return false
     }
 
@@ -102,6 +110,7 @@ private fun Element.hasHtmlSimilarTo(other: Element): Boolean {
     val thisOwnClasses = ownClasses(this)
     val otherOwnClasses = ownClasses(other)
     if (thisOwnClasses != otherOwnClasses) {
+        println("thisOwnClasses '${thisOwnClasses}', otherOwnClasses: '${otherOwnClasses}'")
         return false
     }
 

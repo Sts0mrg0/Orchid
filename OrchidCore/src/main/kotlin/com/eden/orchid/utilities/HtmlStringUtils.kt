@@ -20,12 +20,15 @@ public fun String.encodeSpaces(): String {
                 output += this[i]
             }
             else if(this[i] == ' ') {
+                println("encodeSpaces: converting space")
                 output += "&nbsp;"
             }
             else if(this[i] == '\t') {
+                println("encodeSpaces: converting tab")
                 output += "&emsp;"
             }
             else if(this[i] == '\n') {
+                println("encodeSpaces: converting newline")
                 output += "<br>"
             }
             else {
